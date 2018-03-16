@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1521173661 "homework1.tex" "homework1.pdf" "homework1" 1521173663
+["pdflatex"] 1521173868 "homework1.tex" "homework1.pdf" "homework1" 1521173870
   "/Library/Fonts/Songti.ttc" 1501211855 66933232 48b917363d34d9f8e018d72f817cd5db ""
-  "/dev/null" 1521173660 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "/dev/null" 1521173821 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -95,9 +95,9 @@
   "/usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf" 1463093894 31953 b9489e6e586f798610c60aec1f5ec548 ""
   "/usr/local/texlive/2016/texmf-var/web2c/xetex/xelatex.fmt" 1490181462 3520379 25e96f2086ae799dfbf597b5c86f8661 ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "homework1.aux" 1521173663 222 9ba513e7bbddbde98cc04d13a954b90a ""
-  "homework1.tex" 1521173648 5232 45faa22c439d9b3edb62e3b2e096fb4c ""
+  "homework1.aux" 1521173870 90 627c3af3aaf3a284e448b0ffd42b04c1 ""
+  "homework1.tex" 1521173865 5234 03bd2524b51c9b6305e12418cee333c2 ""
   (generated)
+  "homework1.pdf"
   "homework1.aux"
   "homework1.log"
-  "homework1.pdf"
