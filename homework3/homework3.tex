@@ -1,0 +1,152 @@
+%!TEX program = xelatex
+\documentclass[a4paper]{article}
+
+\usepackage{ctex}
+\usepackage{fontspec, xunicode, xltxtra}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{amsmath,amssymb}
+\usepackage{lastpage}{}
+\usepackage{inden tfirst}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{listings}
+%\usepackage{graphicx}
+
+\setmainfont{Hiragino Sans GB}
+\lhead{1500012775 钱昊}
+\rhead{Page \thepage{} of \pageref{LastPage}}
+\begin{document}
+\section*{3.3}
+类似于0-1背包问题，问题转化为
+
+\begin{align*}
+  & max \sum_{i=1}^{n}v_i x_i (x_i 取 0 or 1) \\
+  & \sum_{i=1}^{n}l_i x_i \le D
+\end{align*}
+令$C[k,y]$代表只考虑前k个货柜，库房长度为y的最大收益。
+
+递推公式有
+
+$$
+C[k,y]=\left\{
+\begin{aligned}
+& C[k-1,y] (y<l_k) \\
+& max(C[k-1,y],C[k-1,y-l_k]+v_k) D\ge y \ge l_k
+\end{aligned}
+\right.
+$$
+边界条件
+
+$$
+C[1,y] = \left \{
+\begin{aligned}
+v_1 \qquad y \ge l_1
+0 \qquad  y < l_1
+\end{aligned}
+\right.
+$$
+伪代码：\\
+for y<-1 to D \\
+\hspace*{0.5cm}
+	$C[1,y] <- v_1$ \\
+for k<-2 to n \\
+\hspace*{0.5cm}
+for  y<-1 to D \\
+\hspace*{1cm}
+C[k,y] <- C[k-1,y] \\
+\\hspace*{1cm}
+i[k,y] <- i[k-1,y] (标记函数)\\
+\hspace*{1cm}
+if $y \ge l_k and C[k-1,y-l_k]+v_k >  C[k-1,y]$ \\
+\hspace*{1cm}
+then $C[k,y] \leftarrow C[k-1,y-l_k]+v_k$ \\
+\hspace*{1.5cm}
+$i[k,y]\leftarrow k$
+最坏时间发杂度$O(nD)$
+
+\section*{3.6}
+令F(k,y)表示用前k种钱币，总钱数为y时可以付款。\\
+F(k,y) = 0 or 1\\
+递推方程为$F(k,y)=max(F(k-1,y),F(k-1,y-v_k))$ \\
+边界条件：\\
+$$
+F(1,y) = \left\{
+\begin{aligned}
+& 1 \quad if \quad y==v_1 \\
+& 0 \quad else
+\end{aligned}
+\right.
+$$
+$F(k,y) == 0 \quad if \quad y < 0$
+标记函数则为i(k,y) \\
+递推方程为\\
+$$
+i(k,y) =\left\{
+\begin{aligned}
+& k \quad if \quad F(k-1,y-v_k) == 1 \\
+& i(k-1,y)  
+\end{aligned}
+\right.
+$$
+
+时间复杂度为$O(nM)$
+\section*{3.12}
+记顶点i，i+1,$\cdots$,j 构成的凸多边形记为A[i+1,j]，原始问题为A[2,n]
+记A[i,j]的最小权值为t[i,j]，考虑edge(i-1,j)，edge(i-1,j)一定属于凸多边形A[i,j]分成的某个子三角形ijk，则可以划分子问题为t(i,k)和t(k+1,j) \\
+有递推方程
+$$
+t[i,j]=\left\{
+\begin{aligned}
+& 0 \quad i == j \\
+& \min_{i\le k<j}(t(i,j),t(i,k)+t(k+1,j)+d(i-1,j)+d(i-1,k)+d(k,j))
+\end{aligned}
+\right.
+$$
+不考虑优化的话，时间复杂度为$O(n^3)$
+\section*{3.15}
+采用动态规划算法解决问题
+记F[j]，表示第1-j天加工任务的最大数目。\\
+w[i,j]表示第i-j天连续工作的加工量。\\
+则$w[i+1,j]=\sum_{k=i+1}^j{\min(x_k,s_{k-i})}$\\
+w[i,j]满足递推方程
+$$
+\left\{
+\begin{aligned}
+& w[i+1,j]=w[i+1,j-1]+\min(x_j,s_{j-i}) \\
+& w[i+1,i+1] =\min(x_{i+1},s_1)
+\end{aligned}
+\right.
+$$
+预处理w[]数组，可在$O(n^2)$时间内得到。
+
+考虑F[j],假设最后一天检修为第i天（或者没检修)
+有递推方程:\\
+$$
+F[j]=\max \left\{
+\begin{aligned}
+& \max_{0<i<j} (F[i-1]+w[i+1,j]) \quad j > 1 \\
+& w[1,j] \quad j > 0
+\end{aligned}
+\right.
+$$
+特别地 F(0) = 0
+时间复杂度为$O(n^2)$ \\
+总时间复杂度为$O(n^2)$
+\section*{3.17}
+令F[i,j]表示从$a_{11}到a_{ij}$的路径上的数最小和。\\
+则$F[i,j]=min(F[i-1,j],F[i-1,j-1])+a_{ij}$\\
+特别地 $F[i,0] = +\infty, F[i,j] (j > i) = + \infty$ \\
+问题即求$\min_{1\le j \le n}(F[n,j])$
+确立标记函数pos(i,j)
+递推方程为
+$$
+pos(i,j) = \left\{
+\begin{aligned}
+& j \quad if \quad F[i-1,j] <F[i-1,j-1] \\
+& j - 1 \quad else
+\end{aligned}
+\right.
+$$ 
+时间复杂度$O(n^2)$
+\end{document}
