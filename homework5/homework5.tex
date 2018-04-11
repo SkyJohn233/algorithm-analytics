@@ -1,0 +1,56 @@
+%!TEX program = xelatex
+\documentclass{article}
+
+\usepackage{ctex}
+\usepackage{fontspec, xunicode, xltxtra}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{amsmath,amssymb}
+\usepackage{lastpage}{}
+\usepackage{inden tfirst}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{verbatim}
+%\usepackage{graphicx}
+
+\setmainfont{Hiragino Sans GB}
+\lhead{1500012775 钱昊}
+\rhead{Page \thepage{} of \pageref{LastPage}}
+\begin{document}
+\section*{4.2}
+使用贪心法，把底面长度从小到大对物品排序，从标号小的物品开始依次装入库房，直到某个物品装不下为止。\\
+证明命题：对任何输入，把物品按照从小到大的顺序装入得到最优解。\\
+使用交换论证。\\
+对于物品集合$S=\{1,2,\cdots,n\}，假设A=\{i_1,i_2,i_3,\cdots,i_k\}是一个最优解，假设i_1=1,i_2=2\cdots,i_{j-1}=j-1,i_j \neq j,\\
+则把i_j 替换成j，得到A^{'},则A^{'}也是一个可行解,也是一个最优解，至多再经过n-1次替换就可以得到B=\{1,2,3\cdots,k\},B也是一个最优解，命题得证$\\
+时间复杂度$T(n)=O(n \log n)$
+\section*{4.3}
+算法思想：首先令$a[1]=d_1+4$，对$d_2,d_3,\cdots,d_n$检查，$\exists j, 使得d_j \le a[1] + 4 并且 d_{j+1} > a[1] + 4 $,则$a[2] = d_{j+1}+4$，直到包含所有的村庄 \\
+伪代码：\\
+a[1]<-d[1]+4 \\
+k<-1 \\
+for j<-2 to n  \\
+\indent	if d[j]>a[k]+4 \\
+\indent	then k<-k+1 \\
+\indent \indent		a[k]<-d[j]+4 \\
+return a \\
+证明：采用归纳假设。\\
+假设对于任何正整数k，存在最优解包含算法前k步选择的基站位置。\\
+k=1，存在最优解包含a[1]，若不然，存在另一个最优解b[1]，$b[1]\neq a[1]，并且b[1]<d_1+4=a[1]$，则将b[1]替换成a[1]，仍是一个最优解，所以命题k等于1的时候成立。\\
+假设对于k，存在最优解A包含算法前k步选择的基站位置\\
+$A=\{a[1],a[2],\cdots,a[k]\} \cup B$ \\
+假定$\{a[1],\cdots,a[k]\}$包含$\{d_1,\cdots,d_s\}$的村庄范围，则B的求解可以看成是对于$\{d_{s+1},\cdots,d_n\}$求解的子问题，根据归纳假设，B=$\{a[k+1],\cdots,a[k^{'}]\}$，从而证明了对于k+1时，命题依旧成立。从而整个命题得证。\\
+时间复杂度$O(n)$
+\section*{4.6}
+采用贪心法：按照加工时间从小到大对作业进行排序，使得$t_i \le t_{i+1}$，按照标号从小到大的次序安排所有作业（并且没有空闲时间）\\
+$time(i_j) = f(i_j)+t(i_j)=\sum_{k=1}^{j}t(i_k)$\\
+f的总共完成时间为$time(f)=\sum_{k=1}^{n}time(i_k)=\sum_{j=1}^{n}t(i_j)(n-j+1)$
+要使平均时间达到最小，即要使time(f)达到最小，由上述表达式可知，让序列t从小到大一定能达到最小，不然存在逆序$(i,j)$,交换i，j一定能达到更小的$time(f)$，经过有限次的变换，一定会达到没有逆序的序列。
+\section*{4.17}
+命题1:设T是图G的一棵最小生成树，C是G的一个圈，如果C中边的权彼此不等，那么在C中权最大的边不属于T。\\
+证明：设e是C中权最大的边，假设e在T中，取C不在T的边e',$\omega(e')<\omega(e)$，用e‘替换e，得到一棵G的生成树T'，且$\omega(T')<\omega(T)$，与T是最小生成树矛盾，命题得证。\\
+命题2:对于$\forall e \in E,令s(e)=-w(e)是边的权值。$构造带权图G‘=<V,E,S>。G'的最小生成树T’满足本题所要求的最佳带宽性质。
+命题2:$\forall u,v \in V,P'是在上述生成树T‘中连接u，v的唯一路径，\omega(P')=\omega(u,v)$
+证明：反证法：，假若不是，那么G’中存在节点u，v,且有一条u-v的路径P，使得$\omega(P)>\omega(P')$,设e‘=（(x,y)是T’中带宽最小的边。又由于$\omega(P')<\omega(P)$
+\end{document}
