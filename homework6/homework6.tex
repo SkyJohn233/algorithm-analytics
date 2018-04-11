@@ -1,0 +1,43 @@
+%!TEX program = xelatex
+\documentclass[a4paper]{article}
+
+\usepackage{ctex}
+\usepackage{fontspec, xunicode, xltxtra}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{amsmath,amssymb}
+\usepackage{lastpage}{}
+\usepackage{inden tfirst}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{listings}
+%\usepackage{graphicx}
+
+\setmainfont{Hiragino Sans GB}
+\lhead{1500012775 钱昊}
+\rhead{Page \thepage{} of \pageref{LastPage}}
+\begin{document}
+\section*{5.2}
+按照价格从小到大对来自不同供应商的零件排序。\\
+假设解向量为$<x_1,x_2,\cdots,x_n>,x_i =j 表示第i号零件由j号供应商供货。$\\
+结点$<x_1,x_2,\cdots,x_n>$表示已经选择了前k号零件的供应商。现在处理第k+1号零件。 \\
+约束条件：选择下一个零件后总价格不超过120。
+代价函数：\\
+$F=\sum_{i=1}^k \omega_{ix_i}+\sum_{j=k+1}^{n}min{\omega (w_{jl})}$
+
+\section*{5.5}
+解向量为$<x_1,x_2,\cdots,x_8$ \\
+在结点$<x_1,x_2,\cdots,x_k>处$，下一个结点条件是$x_{k+1}与x_1,x_2,\cdots,x_k$不在同一列，不在同一行，也不在同一个对角线。然后按广度优先顺序遍历这课树。对于n后问题，最坏情况下时间复杂度为$O(n^n)$
+
+\section*{5.6}
+解向量为$<x_1,x_2,\cdots,x_n>$ \\
+$x_i=1$表示数$n_i$在子集中。\\
+在节点$<x_1,x_2,\cdots,x_k>$,约束条件为$B(i)=\sum_{i=1}^k a_i x_i  < M$
+
+\section*{5.8}
+(1) 上述电路板问题的实例，该实例的最优解之一是${2,1,3,6,4,5,7,8}$,排列密度为2。\\
+(2) 搜索空间是排列树，对于某个节点$<x_1,x_2,\cdots,x_i$，选择下一步节点中的$x_{i+1} \in \{1,2,3,\cdots,n\} - B$为约束条件。界时目前得到的最小的排列密度。 \\
+令total[j]表示连接块j所连接的电路板总数，now[j]表示$\{x_1,x_2,\cdots,x_i\}$中已经包含在$N_j$中的电路板数。\\
+则$N_j$跨越第i和i+1插槽的条件等价于 now[j] < total[j] 并且 now[j] > 0 \\
+观察这组数据 $N_2,N_3,N_4$ 有共同的电路板3，所以排列密度有一个下界2，所以当存在电路板排列，使得排列密度为2时，该排列为该电路板问题实例的最优解。
+\end{document}
